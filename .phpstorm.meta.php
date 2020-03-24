@@ -28,6 +28,12 @@ namespace PHPSTORM_META {
         \Rikudou\Sims4\Paintings\Enums\PaintingStyle::IMPRESSIONISM,
         \Rikudou\Sims4\Paintings\Enums\PaintingStyle::ABSTRACTION
     );
+    registerArgumentsSet(
+        'imageResizerSizes',
+        \Rikudou\Sims4\Paintings\Helper\ImageResizer::SIZE_LARGE,
+        \Rikudou\Sims4\Paintings\Helper\ImageResizer::SIZE_MEDIUM,
+        \Rikudou\Sims4\Paintings\Helper\ImageResizer::SIZE_SMALL
+    );
 
     expectedArguments(
         \Rikudou\Sims4\Paintings\PaintingPackage::createPack(),
@@ -63,6 +69,11 @@ namespace PHPSTORM_META {
         \Rikudou\Sims4\Paintings\Component\RecipeComponent::__construct(),
         1,
         argumentsSet('canvasTypes')
+    );
+    expectedArguments(
+        \Rikudou\Sims4\Paintings\Helper\ImageResizer::__construct(),
+        1,
+        argumentsSet('imageResizerSizes')
     );
 
     expectedReturnValues(
