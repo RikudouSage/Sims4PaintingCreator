@@ -17,7 +17,7 @@ final class ImageResizer
     private $imagePath;
 
     /**
-     * @var array
+     * @var array<int>
      */
     private $size;
 
@@ -27,8 +27,8 @@ final class ImageResizer
     private $resized = null;
 
     /**
-     * @param string $imagePath
-     * @param array  $size
+     * @param string     $imagePath
+     * @param array<int> $size
      */
     public function __construct(string $imagePath, array $size)
     {
@@ -38,6 +38,8 @@ final class ImageResizer
 
     /**
      * Returns the image data as a string
+     *
+     * @throws ImagickException
      *
      * @return string
      */
@@ -50,6 +52,8 @@ final class ImageResizer
      * Writes the image to a file
      *
      * @param string $targetPath
+     *
+     * @throws ImagickException
      */
     public function write(string $targetPath): void
     {

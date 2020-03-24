@@ -6,6 +6,7 @@ use Rikudou\Sims4\Paintings\Component\ComponentInterface;
 use Rikudou\Sims4\Paintings\Component\ImageComponent;
 use Rikudou\Sims4\Paintings\Enums\ComponentFlag;
 use Rikudou\Sims4\Paintings\Helper\BinaryDataWriter;
+use Rikudou\Sims4\Paintings\Helper\ImageResizer;
 
 final class PaintingPackage
 {
@@ -77,14 +78,14 @@ final class PaintingPackage
      * Pack will be automatically created if there is no pack with given painting style
      * If there already is a pack with given painting style the image is added to the first pack available
      *
-     * @param string $filePath
-     * @param string $imageName
-     * @param string $canvasType
-     * @param int    $paintingStyle
+     * @param string|ImageResizer $filePath
+     * @param string              $imageName
+     * @param string              $canvasType
+     * @param int                 $paintingStyle
      *
      * @return ImageComponent
      */
-    public function createImage(string $filePath, string $imageName, string $canvasType, int $paintingStyle): ImageComponent
+    public function createImage($filePath, string $imageName, string $canvasType, int $paintingStyle): ImageComponent
     {
         if (in_array($paintingStyle, $this->styles, true)) {
             $hash = array_search($paintingStyle, $this->styles, true);

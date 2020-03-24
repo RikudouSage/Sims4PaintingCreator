@@ -3,8 +3,10 @@
 namespace Rikudou\Sims4\Paintings\Component;
 
 use Imagick;
+use InvalidArgumentException;
 use Rikudou\Sims4\Paintings\Enums\CanvasType;
 use Rikudou\Sims4\Paintings\Enums\ContentType;
+use Rikudou\Sims4\Paintings\Helper\ImageResizer;
 use Rikudou\Sims4\Paintings\Helper\NoGroupTrait;
 
 final class ImageComponent extends AbstractComponent
@@ -22,7 +24,7 @@ final class ImageComponent extends AbstractComponent
     private $imageName;
 
     /**
-     * @var string
+     * @var string|ImageResizer
      */
     private $filePath;
 
@@ -44,17 +46,20 @@ final class ImageComponent extends AbstractComponent
     /**
      * @internal
      *
-     * @param string $namespace
-     * @param string $imageName
-     * @param string $filePath
-     * @param string $canvasType
+     * @param string              $namespace
+     * @param string              $imageName
+     * @param string|ImageResizer $filePath
+     * @param string              $canvasType
      */
     public function __construct(
         string $namespace,
         string $imageName,
-        string $filePath,
+        $filePath,
         string $canvasType
     ) {
+        if (!is_string($filePath) && !$filePath instanceof ImageResizer) {
+            throw new InvalidArgumentException('The filePath argument must be a string or instance of ' . ImageResizer::class);
+        }
         $this->namespace = $namespace;
         $this->imageName = $imageName;
         $this->filePath = $filePath;
@@ -142,7 +147,12 @@ final class ImageComponent extends AbstractComponent
      */
     protected function getRawContent(): string
     {
-        $imagick = new Imagick($this->filePath);
+        if ($this->filePath instanceof ImageResizer) {
+            $imagick = new Imagick();
+            $imagick->readImageBlob($this->filePath->asString());
+        } else {
+            $imagick = new Imagick($this->filePath);
+        }
 
         // not sure which of these two is needed, documentation is lacking
         $imagick->setFormat('dds');

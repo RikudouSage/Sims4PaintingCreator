@@ -6,6 +6,7 @@ use Rikudou\Sims4\Paintings\Component\ComponentInterface;
 use Rikudou\Sims4\Paintings\Component\ImageComponent;
 use Rikudou\Sims4\Paintings\Component\RecipeComponent;
 use Rikudou\Sims4\Paintings\Component\SnippetComponent;
+use Rikudou\Sims4\Paintings\Helper\ImageResizer;
 
 final class ImagePack
 {
@@ -46,13 +47,13 @@ final class ImagePack
     /**
      * Creates a new image component inside the pack
      *
-     * @param string $filePath
-     * @param string $imageName
-     * @param string $canvasType
+     * @param string|ImageResizer $filePath
+     * @param string              $imageName
+     * @param string              $canvasType
      *
      * @return ImageComponent
      */
-    public function createImage(string $filePath, string $imageName, string $canvasType): ImageComponent
+    public function createImage($filePath, string $imageName, string $canvasType): ImageComponent
     {
         $image = new ImageComponent($this->getNamespace(), $imageName, $filePath, $canvasType);
         $hash = spl_object_hash($image);
