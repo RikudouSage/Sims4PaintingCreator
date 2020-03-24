@@ -1,0 +1,31 @@
+{
+  "name": "rikudou/sims4-painting-package-creator",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Dominik Chrastecky",
+      "email": "dominik@chrastecky.cz"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "ext-imagick": "*",
+    "ext-zlib": "*",
+    "ext-SimpleXML": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Rikudou\\Sims4\\Paintings\\": "src/"
+    }
+  },
+  "description": "",
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.16",
+    "phpstan/phpstan": "^0.12.18"
+  },
+  "scripts": {
+    "fixer": "php-cs-fixer fix src --verbose",
+    "phpstan": "phpstan analyse --level=max src"
+  }
+}

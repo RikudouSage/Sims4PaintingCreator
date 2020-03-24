@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<I c="PaintingTexture" i="recipe" m="crafting.painting" n="{{UniqueName}}" s="{{TuningId}}">
+    <L n="canvas_types">
+        <E>{{EaselType}}</E>
+    </L>
+    <L n="tests">
+        <L>
+            <V t="skill_test">
+                <U n="skill_test">
+                    <T n="skill">16708<!--statistic_Skill_AdultMajor_Painting--></T>
+                    <V t="interval" n="skill_range">
+                        <U n="interval">
+                            <U n="skill_interval">
+                                <T n="lower_bound">{{1}}</T>
+                                <T n="upper_bound">{{10}}</T>
+                            </U>
+                        </U>
+                    </V>
+                </U>
+            </V>
+        </L>
+    </L>
+    <T n="texture">2f7d0004:00000000:{{TextureId}}</T>
+</I>

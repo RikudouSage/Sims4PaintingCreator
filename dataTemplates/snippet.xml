@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<I s="14664559796893342529" n="{{UniqueName}}" c="CCPaintingTextureInstance" i="snippet" m="s4studio_craftables">
+    <T n="s4s_mod_type">PAINTING_TEXTURE</T>
+    <L n="painting_styles">
+        <T>{{PaintingStyle}}</T>
+    </L>
+    <L n="texture_list">
+        <!--<U>
+            <T n="texture">{{TextureId}}</T>
+        </U>-->
+    </L>
+</I>
