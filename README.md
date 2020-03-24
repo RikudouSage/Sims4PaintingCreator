@@ -43,5 +43,13 @@ $image = $package->createImage(
     PaintingStyle::SURREALISM
 );
 
+// or you can use the ImageResizer object directly
+$image = $package->createImage(
+    $resizer,
+    'ImageName',
+    CanvasType::CANVAS_SIZE_LARGE,
+    PaintingStyle::SURREALISM
+);
+
 $package->write('/path/to/result.package');
 ```
