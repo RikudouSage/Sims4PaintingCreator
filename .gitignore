@@ -3,6 +3,5 @@
 /composer.lock
 /input
 /output
-/*.php
 /.php_cs
 /.php_cs.cache

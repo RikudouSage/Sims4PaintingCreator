@@ -1,0 +1,81 @@
+<?php
+
+namespace PHPSTORM_META {
+
+    registerArgumentsSet(
+        'canvasTypes',
+        \Rikudou\Sims4\Paintings\Enums\CanvasType::CANVAS_SIZE_LARGE,
+        \Rikudou\Sims4\Paintings\Enums\CanvasType::CANVAS_SIZE_MEDIUM,
+        \Rikudou\Sims4\Paintings\Enums\CanvasType::CANVAS_SIZE_SMALL
+    );
+    registerArgumentsSet(
+        'contentGroups',
+        \Rikudou\Sims4\Paintings\Enums\ContentGroup::NONE,
+        \Rikudou\Sims4\Paintings\Enums\ContentGroup::SNIPPET
+    );
+    registerArgumentsSet(
+        'contentTypes',
+        \Rikudou\Sims4\Paintings\Enums\ContentType::BITMAP,
+        \Rikudou\Sims4\Paintings\Enums\ContentType::RECIPE,
+        \Rikudou\Sims4\Paintings\Enums\ContentType::SNIPPET
+    );
+    registerArgumentsSet(
+        'paintingStyles',
+        \Rikudou\Sims4\Paintings\Enums\PaintingStyle::REALISM,
+        \Rikudou\Sims4\Paintings\Enums\PaintingStyle::SURREALISM,
+        \Rikudou\Sims4\Paintings\Enums\PaintingStyle::CLASSIC,
+        \Rikudou\Sims4\Paintings\Enums\PaintingStyle::POP_ART,
+        \Rikudou\Sims4\Paintings\Enums\PaintingStyle::IMPRESSIONISM,
+        \Rikudou\Sims4\Paintings\Enums\PaintingStyle::ABSTRACTION
+    );
+
+    expectedArguments(
+        \Rikudou\Sims4\Paintings\PaintingPackage::createPack(),
+        0,
+        argumentsSet('paintingStyles')
+    );
+    expectedArguments(
+        \Rikudou\Sims4\Paintings\PaintingPackage::createImage(),
+        3,
+        argumentsSet('paintingStyles')
+    );
+    expectedArguments(
+        \Rikudou\Sims4\Paintings\ImagePack::__construct(),
+        2,
+        argumentsSet('paintingStyles')
+    );
+    expectedArguments(
+        \Rikudou\Sims4\Paintings\Component\SnippetComponent::__construct(),
+        1,
+        argumentsSet('paintingStyles')
+    );
+    expectedArguments(
+        \Rikudou\Sims4\Paintings\ImagePack::createImage(),
+        2,
+        argumentsSet('canvasTypes')
+    );
+    expectedArguments(
+        \Rikudou\Sims4\Paintings\Component\ImageComponent::__construct(),
+        3,
+        argumentsSet('canvasTypes')
+    );
+    expectedArguments(
+        \Rikudou\Sims4\Paintings\Component\RecipeComponent::__construct(),
+        1,
+        argumentsSet('canvasTypes')
+    );
+
+    expectedReturnValues(
+        \Rikudou\Sims4\Paintings\Component\ComponentInterface::getType(),
+        argumentsSet('contentTypes')
+    );
+    expectedReturnValues(
+        \Rikudou\Sims4\Paintings\Component\ComponentInterface::getGroup(),
+        argumentsSet('contentTypes')
+    );
+    expectedReturnValues(
+        \Rikudou\Sims4\Paintings\Component\ComponentInterface::getGroup(),
+        argumentsSet('contentGroups')
+    );
+
+}
