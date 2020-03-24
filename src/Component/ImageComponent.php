@@ -3,6 +3,7 @@
 namespace Rikudou\Sims4\Paintings\Component;
 
 use Imagick;
+use Rikudou\Sims4\Paintings\Enums\CanvasType;
 use Rikudou\Sims4\Paintings\Enums\ContentType;
 use Rikudou\Sims4\Paintings\Helper\NoGroupTrait;
 
@@ -60,12 +61,17 @@ final class ImageComponent extends AbstractComponent
         $this->canvasType = $canvasType;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getType(): int
     {
         return ContentType::BITMAP;
     }
 
     /**
+     * Returns the minimum level required to paint this painting
+     *
      * @return int
      */
     public function getMinLevel(): int
@@ -74,6 +80,8 @@ final class ImageComponent extends AbstractComponent
     }
 
     /**
+     * Sets the minimum level required to paint this painting
+     *
      * @param int $minLevel
      *
      * @return ImageComponent
@@ -86,6 +94,8 @@ final class ImageComponent extends AbstractComponent
     }
 
     /**
+     * Returns the maximum level allowed to paint this painting
+     *
      * @return int
      */
     public function getMaxLevel(): int
@@ -94,6 +104,8 @@ final class ImageComponent extends AbstractComponent
     }
 
     /**
+     * Sets the minimum level allowed to paint this painting
+     *
      * @param int $maxLevel
      *
      * @return self
@@ -105,12 +117,19 @@ final class ImageComponent extends AbstractComponent
         return $this;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getUniqueName(): string
     {
         return $this->namespace . ':' . $this->imageName;
     }
 
     /**
+     * Returns the canvas type for this component
+     *
+     * @see CanvasType
+     *
      * @return string
      */
     public function getCanvasType(): string
@@ -118,6 +137,9 @@ final class ImageComponent extends AbstractComponent
         return $this->canvasType;
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function getRawContent(): string
     {
         $imagick = new Imagick($this->filePath);

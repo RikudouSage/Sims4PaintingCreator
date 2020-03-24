@@ -3,6 +3,7 @@
 namespace Rikudou\Sims4\Paintings\Helper;
 
 use Imagick;
+use ImagickException;
 
 final class ImageResizer
 {
@@ -35,16 +36,33 @@ final class ImageResizer
         $this->size = $size;
     }
 
+    /**
+     * Returns the image data as a string
+     *
+     * @return string
+     */
     public function asString(): string
     {
         return $this->resize()->getImageBlob();
     }
 
+    /**
+     * Writes the image to a file
+     *
+     * @param string $targetPath
+     */
     public function write(string $targetPath): void
     {
         file_put_contents($targetPath, $this->asString());
     }
 
+    /**
+     * Resizes the image using imagick
+     *
+     * @throws ImagickException
+     *
+     * @return Imagick
+     */
     private function resize(): Imagick
     {
         if ($this->resized === null) {

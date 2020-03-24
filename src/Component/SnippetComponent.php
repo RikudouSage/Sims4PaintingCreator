@@ -41,21 +41,33 @@ final class SnippetComponent extends AbstractComponent
         $this->images = $images;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getType(): int
     {
         return ContentType::SNIPPET;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getGroup(): int
     {
         return ContentGroup::SNIPPET;
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function getUniqueName(): string
     {
         return $this->namespace . ':Snippet';
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function getRawContent(): string
     {
         $content = file_get_contents(self::XML_PATH);

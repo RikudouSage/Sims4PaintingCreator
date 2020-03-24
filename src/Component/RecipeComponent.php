@@ -52,7 +52,6 @@ final class RecipeComponent extends AbstractComponent
      * @param string $textureId
      *
      * @internal
-     *
      */
     public function __construct(
         string $namespace,
@@ -68,16 +67,25 @@ final class RecipeComponent extends AbstractComponent
         $this->textureId = $textureId;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getType(): int
     {
         return ContentType::RECIPE;
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function getUniqueName(): string
     {
         return $this->namespace . ':Recipe';
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function getRawContent(): string
     {
         $content = file_get_contents(self::XML_PATH);

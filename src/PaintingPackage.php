@@ -35,6 +35,13 @@ final class PaintingPackage
         $this->packageName = $packageName;
     }
 
+    /**
+     * Creates a new pack inside the package
+     *
+     * @param int $paintingStyle
+     *
+     * @return ImagePack
+     */
     public function createPack(int $paintingStyle): ImagePack
     {
         $pack = new ImagePack($this->author, $this->packageName, $paintingStyle);
@@ -45,6 +52,13 @@ final class PaintingPackage
         return $pack;
     }
 
+    /**
+     * Removes an existing pack from the package
+     *
+     * @param ImagePack $pack
+     *
+     * @return $this
+     */
     public function removePack(ImagePack $pack): self
     {
         $hash = spl_object_hash($pack);
@@ -58,6 +72,18 @@ final class PaintingPackage
         return $this;
     }
 
+    /**
+     * Shorthand for creating an image
+     * Pack will be automatically created if there is no pack with given painting style
+     * If there already is a pack with given painting style the image is added to the first pack available
+     *
+     * @param string $filePath
+     * @param string $imageName
+     * @param string $canvasType
+     * @param int    $paintingStyle
+     *
+     * @return ImageComponent
+     */
     public function createImage(string $filePath, string $imageName, string $canvasType, int $paintingStyle): ImageComponent
     {
         if (in_array($paintingStyle, $this->styles, true)) {
@@ -70,6 +96,11 @@ final class PaintingPackage
         return $pack->createImage($filePath, $imageName, $canvasType);
     }
 
+    /**
+     * Writes the package to a file
+     *
+     * @param string $targetPath
+     */
     public function write(string $targetPath): void
     {
         $body = '';
@@ -92,6 +123,14 @@ final class PaintingPackage
         file_put_contents($targetPath, $output);
     }
 
+    /**
+     * Creates index data from a component
+     *
+     * @param ComponentInterface $component
+     * @param int                $position
+     *
+     * @return string
+     */
     private function createIndex(ComponentInterface $component, int $position): string
     {
         $index = '';
@@ -108,6 +147,15 @@ final class PaintingPackage
         return $index;
     }
 
+    /**
+     * Creates header data
+     *
+     * @param int $indexSize
+     * @param int $indexOffset
+     * @param int $indexCount
+     *
+     * @return string
+     */
     private function createHeader(int $indexSize, int $indexOffset, int $indexCount): string
     {
         $header = 'DBPF';
