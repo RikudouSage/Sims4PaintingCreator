@@ -60,14 +60,14 @@ interface ComponentInterface
     /**
      * Returns the full instance id (16 bytes)
      *
-     * @return int
+     * @return string
      */
-    public function getFullInstanceId(): int;
+    public function getFullInstanceId(): string;
 
     /**
      * Returns the full instance ID as a hexadecimal string
      *
      * @return string
      */
-    public function getFullInstanceIdAsString(): string;
+    public function getFullInstanceIdAsHex(): string;
 }

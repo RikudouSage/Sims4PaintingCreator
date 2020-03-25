@@ -2,39 +2,39 @@
 
 namespace Rikudou\Sims4\Paintings\Component;
 
+use Rikudou\Sims4\Paintings\Helper\MathUtils;
 use RuntimeException;
 
 abstract class AbstractComponent implements ComponentInterface
 {
-    /**
-     * @var int
-     */
-    private $instanceId1;
-
-    /**
-     * @var int
-     */
-    private $instanceId2;
-
     /**
      * @var string|null
      */
     private $rawContent = null;
 
     /**
+     * @var string
+     */
+    private $instanceId;
+
+    /**
      * @inheritDoc
      */
-    public function getFullInstanceId(): int
+    public function getFullInstanceId(): string
     {
-        return intval($this->getInstanceId1() . $this->getInstanceId2());
+        return MathUtils::hexToDec($this->getFullInstanceIdAsHex());
     }
 
     /**
      * @inheritDoc
      */
-    public function getFullInstanceIdAsString(): string
+    public function getFullInstanceIdAsHex(): string
     {
-        return strtoupper(dechex($this->getInstanceId1()) . dechex($this->getInstanceId2()));
+        if (!$this->instanceId) {
+            $this->assignInstanceIds();
+        }
+
+        return strtoupper($this->instanceId);
     }
 
     /**
@@ -42,11 +42,7 @@ abstract class AbstractComponent implements ComponentInterface
      */
     public function getInstanceId1(): int
     {
-        if (!$this->instanceId1) {
-            $this->assignInstanceIds();
-        }
-
-        return $this->instanceId1;
+        return (int) hexdec(str_split($this->getFullInstanceIdAsHex(), 8)[0]);
     }
 
     /**
@@ -54,11 +50,7 @@ abstract class AbstractComponent implements ComponentInterface
      */
     public function getInstanceId2(): int
     {
-        if (!$this->instanceId1) {
-            $this->assignInstanceIds();
-        }
-
-        return $this->instanceId2;
+        return (int) hexdec(str_split($this->getFullInstanceIdAsHex(), 8)[1]);
     }
 
     /**
@@ -122,10 +114,10 @@ abstract class AbstractComponent implements ComponentInterface
      */
     private function assignInstanceIds(): void
     {
-        $hash = hash('fnv164', $this->getUniqueName());
-        $parts = str_split($hash, 8);
-        $this->instanceId1 = (int) hexdec($parts[0]);
-        $this->instanceId2 = (int) hexdec($parts[1]);
+        $hash = MathUtils::FNV1($this->getUniqueName());
+        $hash = MathUtils::decToHex($hash);
+        $hash = str_pad($hash, 16, '8', STR_PAD_LEFT);
+        $this->instanceId = $hash;
     }
 
     /**

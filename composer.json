@@ -12,7 +12,8 @@
   "require": {
     "ext-imagick": "*",
     "ext-zlib": "*",
-    "ext-SimpleXML": "*"
+    "ext-SimpleXML": "*",
+    "ext-gmp": "*"
   },
   "autoload": {
     "psr-4": {

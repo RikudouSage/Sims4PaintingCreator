@@ -86,22 +86,23 @@ final class ImagePack
      */
     public function getComponents(): array
     {
+        $recipes = [];
         $result = [];
         foreach ($this->images as $image) {
             $result[] = $image;
-            $result[] = new RecipeComponent(
+            $result[] = $recipes[] = new RecipeComponent(
                 $image->getUniqueName(),
                 $image->getCanvasType(),
                 $image->getMinLevel(),
                 $image->getMaxLevel(),
-                $image->getFullInstanceIdAsString()
+                $image->getFullInstanceIdAsHex()
             );
         }
 
         $result[] = new SnippetComponent(
             $this->getNamespace(),
             $this->paintingStyle,
-            $this->images
+            $recipes
         );
 
         return $result;

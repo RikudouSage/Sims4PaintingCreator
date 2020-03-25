@@ -23,22 +23,22 @@ final class SnippetComponent extends AbstractComponent
     private $paintingStyle;
 
     /**
-     * @var ImageComponent[]
+     * @var RecipeComponent[]
      */
-    private $images;
+    private $recipes;
 
     /**
-     * @internal
+     * @param string            $namespace
+     * @param int               $paintingStyle
+     * @param RecipeComponent[] $recipes
      *
-     * @param string           $namespace
-     * @param int              $paintingStyle
-     * @param ImageComponent[] $images
+     * @internal
      */
-    public function __construct(string $namespace, int $paintingStyle, array $images)
+    public function __construct(string $namespace, int $paintingStyle, array $recipes)
     {
         $this->namespace = $namespace;
         $this->paintingStyle = $paintingStyle;
-        $this->images = $images;
+        $this->recipes = $recipes;
     }
 
     /**
@@ -81,10 +81,10 @@ final class SnippetComponent extends AbstractComponent
             if ((string) $item['n'] === 'painting_styles') {
                 $item->T = $this->paintingStyle;
             } else {
-                foreach ($this->images as $image) {
+                foreach ($this->recipes as $recipe) {
                     $child = $item->addChild('U');
                     /** @var SimpleXMLElement $child->T */
-                    $child->T = $image->getFullInstanceId();
+                    $child->T = $recipe->getFullInstanceId();
                     $child->T['n'] = 'texture';
                 }
             }
